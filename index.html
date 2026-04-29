@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verdana — Urban Plant Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- ✅ Replace G-XXXXXXXXXX with your Google Analytics Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+
+    // Helper to track custom events
+    function trackEvent(name, params) {
+      gtag('event', name, params);
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F5F0E8;
+      --ink: #1A1A14;
+      --sage: #7A9E7E;
+      --rust: #C4622D;
+      --mist: #D6E4D6;
+      --gold: #C9A84C;
+      --light-ink: #4A4A3A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,26,20,0.08);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--sage); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--light-ink);
+      font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--rust); }
+    .nav-cta {
+      background: var(--ink); color: var(--cream) !important;
+      padding: 0.55rem 1.4rem; border-radius: 2px;
+    }
+    .nav-cta:hover { background: var(--sage); color: var(--cream) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 4rem 6rem 5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em { font-style: italic; color: var(--rust); }
+    .hero-sub {
+      color: var(--light-ink); font-size: 1.05rem; line-height: 1.7;
+      max-width: 420px; margin-bottom: 3rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--rust); color: var(--cream);
+      padding: 0.85rem 2.2rem; border: none; border-radius: 2px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.25s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent; color: var(--ink);
+      padding: 0.85rem 2.2rem; border: 1.5px solid var(--ink); border-radius: 2px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-secondary:hover { background: var(--ink); color: var(--cream); }
+
+    .hero-visual {
+      background: var(--mist);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-plant-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 40%, rgba(122,158,126,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 30% 80%, rgba(201,168,76,0.15) 0%, transparent 50%);
+    }
+    .hero-plant-illustration {
+      font-size: 12rem; line-height: 1;
+      position: relative; z-index: 1;
+      animation: float 5s ease-in-out infinite;
+      user-select: none;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+    .hero-badge {
+      position: absolute; bottom: 2.5rem; left: 2.5rem;
+      background: var(--cream); padding: 1rem 1.4rem;
+      border-left: 3px solid var(--gold);
+      font-size: 0.8rem; line-height: 1.6;
+    }
+    .hero-badge strong { display: block; font-size: 1.2rem; color: var(--sage); }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--ink); color: var(--cream);
+      padding: 0.9rem 0; overflow: hidden;
+    }
+    .marquee-inner {
+      display: flex; gap: 3rem; white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-inner span { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .marquee-inner .dot { color: var(--gold); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── PRODUCTS ── */
+    section { padding: 6rem 5rem; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      margin-bottom: 3.5rem;
+    }
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+    .product-card {
+      background: white; border-radius: 4px;
+      overflow: hidden; cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+    .product-img {
+      height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+    }
+    .product-img.c1 { background: #E8F0E8; }
+    .product-img.c2 { background: #F0E8E0; }
+    .product-img.c3 { background: #E8EEF5; }
+    .product-img.c4 { background: #F5EDE8; }
+    .product-body { padding: 1.4rem; }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .product-type { font-size: 0.8rem; color: var(--light-ink); margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-size: 1rem; font-weight: 500; }
+    .btn-add {
+      background: var(--sage); color: white;
+      border: none; padding: 0.45rem 1rem;
+      border-radius: 2px; font-size: 0.8rem;
+      cursor: pointer; letter-spacing: 0.05em;
+      transition: background 0.2s;
+    }
+    .btn-add:hover { background: var(--ink); }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--ink); color: var(--cream);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      padding: 0;
+    }
+    .about-text { padding: 6rem 5rem; }
+    .about-text .section-label { color: var(--gold); }
+    .about-text .section-title { color: var(--cream); }
+    .about-text p { color: rgba(245,240,232,0.72); line-height: 1.8; max-width: 440px; }
+    .about-text .btn-primary { margin-top: 2.5rem; display: inline-block; }
+    .about-visual {
+      background: var(--sage);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10rem;
+      min-height: 400px;
+    }
+
+    /* ── STATS ── */
+    .stats { background: var(--mist); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem; color: var(--rust); line-height: 1;
+    }
+    .stat-label { font-size: 0.85rem; letter-spacing: 0.1em; color: var(--light-ink); margin-top: 0.5rem; text-transform: uppercase; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: var(--cream);
+      text-align: center; padding: 6rem 3rem;
+      border-top: 1px solid rgba(26,26,20,0.08);
+    }
+    .newsletter .section-title { max-width: 600px; margin: 0 auto 2rem; }
+    .newsletter-form {
+      display: flex; gap: 0.5rem; justify-content: center;
+      max-width: 500px; margin: 0 auto;
+    }
+    .newsletter-form input {
+      flex: 1; padding: 0.85rem 1.2rem;
+      border: 1.5px solid var(--ink); border-radius: 2px;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      outline: none;
+    }
+    .newsletter-form input:focus { border-color: var(--sage); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(245,240,232,0.5);
+      padding: 2.5rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.82rem;
+    }
+    footer a { color: rgba(245,240,232,0.5); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--ink); color: var(--cream);
+      padding: 1rem 1.5rem; border-radius: 3px;
+      font-size: 0.875rem; border-left: 3px solid var(--sage);
+      transform: translateY(100px); opacity: 0;
+      transition: transform 0.35s, opacity 0.35s;
+      z-index: 999;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 340px; }
+      .hero-text { padding: 3rem 2rem; }
+      section { padding: 4rem 2rem; }
+      .about-strip { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Ver<span>d</span>ana</a>
+  <ul class="nav-links">
+    <li><a href="#shop" onclick="trackEvent('nav_click', {item: 'shop'})">Shop</a></li>
+    <li><a href="#about" onclick="trackEvent('nav_click', {item: 'about'})">About</a></li>
+    <li><a href="#" onclick="trackEvent('nav_click', {item: 'journal'})">Journal</a></li>
+    <li><a href="#newsletter" class="nav-cta" onclick="trackEvent('nav_click', {item: 'cta'})">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="hero-text">
+    <p class="hero-eyebrow">🌿 Urban Plant Studio · Est. 2021</p>
+    <h1 class="hero-title">Bring the<br><em>wild inside</em><br>your home.</h1>
+    <p class="hero-sub">Curated indoor plants, handmade ceramics, and expert care guides — delivered to your door in 48 hours.</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn-primary" onclick="trackEvent('hero_cta', {label: 'shop_now'})">Shop Collection</a>
+      <a href="#about" class="btn-secondary" onclick="trackEvent('hero_cta', {label: 'learn_more'})">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-plant-bg"></div>
+    <div class="hero-plant-illustration">🪴</div>
+    <div class="hero-badge">
+      <strong>2,400+</strong>
+      happy plant parents this month
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>Free shipping on orders over $60</span><span class="dot">✦</span>
+    <span>Expert care guides included</span><span class="dot">✦</span>
+    <span>30-day plant guarantee</span><span class="dot">✦</span>
+    <span>Sustainably sourced</span><span class="dot">✦</span>
+    <span>Over 200 varieties in stock</span><span class="dot">✦</span>
+    <span>Free shipping on orders over $60</span><span class="dot">✦</span>
+    <span>Expert care guides included</span><span class="dot">✦</span>
+    <span>30-day plant guarantee</span><span class="dot">✦</span>
+    <span>Sustainably sourced</span><span class="dot">✦</span>
+    <span>Over 200 varieties in stock</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="shop">
+  <p class="section-label">Our Collection</p>
+  <h2 class="section-title">Staff picks this season</h2>
+  <div class="products-grid" id="products-grid">
+
+    <div class="product-card" onclick="addToCart('Monstera Deliciosa', 49)">
+      <div class="product-img c1">🌿</div>
+      <div class="product-body">
+        <div class="product-name">Monstera Deliciosa</div>
+        <div class="product-type">Tropical · Low maintenance</div>
+        <div class="product-footer">
+          <span class="product-price">$49</span>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="addToCart('Golden Pothos', 28)">
+      <div class="product-img c2">🍃</div>
+      <div class="product-body">
+        <div class="product-name">Golden Pothos</div>
+        <div class="product-type">Trailing · Beginner friendly</div>
+        <div class="product-footer">
+          <span class="product-price">$28</span>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="addToCart('Fiddle Leaf Fig', 89)">
+      <div class="product-img c3">🌱</div>
+      <div class="product-body">
+        <div class="product-name">Fiddle Leaf Fig</div>
+        <div class="product-type">Statement · Bright indirect light</div>
+        <div class="product-footer">
+          <span class="product-price">$89</span>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="addToCart('Desert Echeveria Set', 38)">
+      <div class="product-img c4">🌵</div>
+      <div class="product-body">
+        <div class="product-name">Desert Echeveria Set</div>
+        <div class="product-type">Succulent · Drought tolerant</div>
+        <div class="product-footer">
+          <span class="product-price">$38</span>
+          <button class="btn-add">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Plant Varieties</div></div>
+    <div class="stat"><div class="stat-num">48h</div><div class="stat-label">Delivery</div></div>
+    <div class="stat"><div class="stat-num">30d</div><div class="stat-label">Guarantee</div></div>
+    <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Average Rating</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <div class="about-text">
+    <p class="section-label">Our Philosophy</p>
+    <h2 class="section-title">Plants make spaces feel alive.</h2>
+    <p>We started Verdana because we believed everyone deserves a little nature in their home. Every plant we sell is hand-selected, properly acclimated, and packed with care so it arrives in perfect condition.</p>
+    <a href="#shop" class="btn-primary" onclick="trackEvent('about_cta', {label: 'shop_now'})">Explore Our Range</a>
+  </div>
+  <div class="about-visual">🌸</div>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <p class="section-label">Stay in the loop</p>
+  <h2 class="section-title">Care tips, new arrivals & exclusive drops.</h2>
+  <div class="newsletter-form">
+    <input type="email" id="email-input" placeholder="your@email.com" />
+    <button class="btn-primary" onclick="subscribe()">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Verdana Plant Studio. All rights reserved.</span>
+  <span>
+    <a href="#" onclick="trackEvent('footer_click', {item: 'privacy'})">Privacy</a> ·
+    <a href="#" onclick="trackEvent('footer_click', {item: 'terms'})">Terms</a> ·
+    <a href="#" onclick="trackEvent('footer_click', {item: 'contact'})">Contact</a>
+  </span>
+</footer>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+  // ── Cart interaction (GA4 add_to_cart event) ──
+  function addToCart(name, price) {
+    trackEvent('add_to_cart', {
+      currency: 'USD',
+      value: price,
+      items: [{ item_name: name, price: price, quantity: 1 }]
+    });
+    showToast('🌿 ' + name + ' added to cart!');
+  }
+
+  // ── Newsletter signup (GA4 generate_lead event) ──
+  function subscribe() {
+    const email = document.getElementById('email-input').value;
+    if (!email || !email.includes('@')) {
+      showToast('Please enter a valid email address.');
+      return;
+    }
+    trackEvent('generate_lead', { method: 'newsletter' });
+    document.getElementById('email-input').value = '';
+    showToast('🎉 You\'re on the list! Welcome to Verdana.');
+  }
+
+  // ── Toast helper ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3200);
+  }
+
+  // ── GA4 scroll depth tracking ──
+  let scrollMilestones = new Set();
+  window.addEventListener('scroll', () => {
+    const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    [25, 50, 75, 90].forEach(m => {
+      if (pct >= m && !scrollMilestones.has(m)) {
+        scrollMilestones.add(m);
+        trackEvent('scroll', { percent_scrolled: m });
+      }
+    });
+  });
+
+  // ── GA4 page timing ──
+  window.addEventListener('load', () => {
+    const loadTime = Math.round(performance.now());
+    trackEvent('page_load_time', { milliseconds: loadTime });
+  });
+</script>
+</body>
+</html>
